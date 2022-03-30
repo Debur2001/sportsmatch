@@ -10,5 +10,5 @@ import retrofit2.http.GET;
 
 public interface PlayerAPI {
     @GET("teste.json")
-    Call<ArrayList<Resposta>> getPlayers();
+    Call<Resposta> getPlayers();
 }

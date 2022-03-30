@@ -1,5 +1,6 @@
 package com.example.sportsmatch.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -18,12 +19,12 @@ import java.util.List;
 
 public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder> {
 
-    private ObjectElement[] objectElement;
-    private List<Player> players;
-    private ArrayList<Resposta> resposta;
+    private Resposta resposta;
+    private Player player;
 
-    public PlayerAdapter(ArrayList<Resposta> resposta) {
+    public PlayerAdapter(Resposta resposta) {
         this.resposta = resposta;
+        player = resposta.getObject().get(0).getPlayer();
     }
 
     @NonNull
@@ -35,19 +36,33 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
         return new ViewHolder(binding);
     }
 
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Context context = holder.itemView.getContext();
         //Use the provided View Holder on the onCreateViewHolder method to populate the current row on the RecyclerView
-        Player player = this.players.get(position);
 
         Glide.with(context).load(player.getImg()).circleCrop().into(holder.binding.ivImage);
+        holder.binding.tvUser.setText(player.getName());
+        holder.binding.tvTime.setText(player.getCountry());
+        holder.binding.tvPosition.setText(player.getPos());
+        holder.binding.tvRating.setText(String.format("%.3f", player.getPercentual()));
+        // Copas Vencidas
+        holder.binding.tvRankingTitulos.setText(player.getBarras().getCopasDoMundoVencidas().getPos() + "º");
+        holder.binding.pbCopasVencidas.setMax((int) player.getBarras().getCopasDoMundoVencidas().getMax());
+        holder.binding.pbCopasVencidas.setProgress((int) player.getBarras().getCopasDoMundoVencidas().getPla());
+        holder.binding.flTvTitulos.setText(String.format("%.1f", player.getBarras().getCopasDoMundoVencidas().getPla()));
+        // Copas Disputadas
+        holder.binding.tvRankingParticipacoes.setText(player.getBarras().getCopasDoMundoDisputadas().getPos() + "º");
+        holder.binding.pbCopasDisputadas.setMax((int) player.getBarras().getCopasDoMundoDisputadas().getMax());
+        holder.binding.pbCopasDisputadas.setProgress((int) player.getBarras().getCopasDoMundoDisputadas().getPla());
+        holder.binding.flTvParticipacoes.setText(String.format("%.1f", player.getBarras().getCopasDoMundoDisputadas().getPla()));
 
     }
 
     @Override
     public int getItemCount() {
-        return this.players.size();
+        return 1;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

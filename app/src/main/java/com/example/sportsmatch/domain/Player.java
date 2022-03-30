@@ -1,11 +1,14 @@
 package com.example.sportsmatch.domain;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Player {
     private String img;
     private String name;
     private double percentual;
     private String pos;
     private String country;
+    @SerializedName("Barras")
     private Barras barras;
 
     public String getImg() { return img; }

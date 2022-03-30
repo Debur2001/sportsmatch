@@ -1,12 +1,29 @@
 package com.example.sportsmatch.domain;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 public class Resposta {
+    @SerializedName("Status")
     private long status;
-    private ObjectElement[] object;
 
-    public long getStatus() { return status; }
-    public void setStatus(long value) { this.status = value; }
+    @SerializedName("Object")
+    private List<ObjectElement> object;
 
-    public ObjectElement[] getObject() { return object; }
-    public void setObject(ObjectElement[] value) { this.object = value; }
+    public long getStatus() {
+        return status;
+    }
+
+    public void setStatus(long status) {
+        this.status = status;
+    }
+
+    public List<ObjectElement> getObject() {
+        return object;
+    }
+
+    public void setObject(List<ObjectElement> object) {
+        this.object = object;
+    }
 }

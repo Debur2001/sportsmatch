@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private PlayerAPI playerAPI;
-    private Resposta resposta;
     private PlayerAdapter playersAdapter;
     //private MutableLiveData<List<Player>> players = new MutableLiveData<>();
 
@@ -59,11 +58,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void findPlayersFromAPI() {
-        playerAPI.getPlayers().enqueue(new Callback<ArrayList<Resposta>>() {
+        playerAPI.getPlayers().enqueue(new Callback<Resposta>() {
             @Override
-            public void onResponse(@NonNull Call<ArrayList<Resposta>> call, @NonNull Response<ArrayList<Resposta>> response) {
+            public void onResponse(@NonNull Call<Resposta> call, @NonNull Response<Resposta> response) {
                 if (response.isSuccessful()) {
-                    ArrayList<Resposta> resposta = response.body();
+                    Resposta resposta = response.body();
                     playersAdapter = new PlayerAdapter(resposta);
                     binding.rvPlayer.setAdapter(playersAdapter);
                 } else {
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(@NonNull Call<ArrayList<Resposta>> call, @NonNull Throwable e) {
+            public void onFailure(@NonNull Call<Resposta> call, @NonNull Throwable e) {
                 e.printStackTrace();
                 //TODO implementar tratamento de erros
             }

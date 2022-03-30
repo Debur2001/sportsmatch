@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Sportsmatch</string>
+    <string name="text_default">Texto default</string>
+    <string name="text_default_numerico">20º</string>
+    <string name="copas_do_mundo_vencidas">Copas do Mundo Vencidas</string>
+    <string name="copas_do_mundo_disputadas">Copas do Mundo Disputadas</string>
+    <string name="imagem_do_jogador">imagem do jogador</string>
 </resources>
